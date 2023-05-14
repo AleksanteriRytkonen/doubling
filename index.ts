@@ -61,8 +61,6 @@ app.post('/play', async (req: Request, res: Response) => {
             return res.status(403).json({ error: 'You dont have enough money to play' })
         }
         await dbHelp.updatePlayer(db, player_id, bet, balance)
-        /*const card = Math.floor(Math.random() * 13) + 1
-        console.log(gameHelp.playRound(bet, choice))*/
         const round = gameHelp.playRound(bet, choice)
 
         //const win = (choice === 'small' && card <= 6) || (choice === 'large' && card >= 8)

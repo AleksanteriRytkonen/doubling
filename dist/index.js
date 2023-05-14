@@ -65,8 +65,6 @@ app.post('/play', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(403).json({ error: 'You dont have enough money to play' });
         }
         yield dbHelp.updatePlayer(db, player_id, bet, balance);
-        /*const card = Math.floor(Math.random() * 13) + 1
-        console.log(gameHelp.playRound(bet, choice))*/
         const round = gameHelp.playRound(bet, choice);
         //const win = (choice === 'small' && card <= 6) || (choice === 'large' && card >= 8)
         if (round.win === 0) {
@@ -85,8 +83,6 @@ app.post('/play', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         else {
             // PLAY MORE
-            //const winAmount = win ? bet * 2 : 0
-            // const profit = winAmount - bet
             const game = {
                 id: id,
                 player_id,

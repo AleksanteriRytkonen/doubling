@@ -78,15 +78,21 @@ describe('Game Engine API', () => {
                 .expect(200)
                 .expect('Content-Type', /json/);
             const body = playResponse.body;
-            expect(body).toEqual(expect.objectContaining({
-                win: 20,
-                gameId: expect.any(String),
-                card: expect.any(Number)
-            })
-                ||
-                    expect.objectContaining({
-                        message: expect.any(String)
-                    }));
+            if (body.win !== undefined) {
+                expect(body).toMatchObject({
+                    win: 20,
+                    gameId: expect.any(String),
+                    card: expect.any(Number)
+                });
+            }
+            else if (body.message !== undefined) {
+                expect(body).toMatchObject({
+                    message: "Game lost"
+                });
+            }
+            else {
+                fail('Unexpected response body');
+            }
         }));
         it('no balance to start a game', () => __awaiter(void 0, void 0, void 0, function* () {
             const playResponse = yield (0, supertest_1.default)(index_1.default)
@@ -111,18 +117,6 @@ describe('Game Engine API', () => {
             })
                 .expect(500);
         }));
-        /*it('creates a game', async () => {
-            const game: Game = {
-                id: '1337',
-                playerId: playerWithBalance,
-                timestamp: new Date().toISOString(),
-                bet,
-                choice,
-                card: 11,
-                win: 20,
-                profit: 10
-            }
-        })*/
     });
     /*describe('POST /games/continue', () => {
         beforeEach(async () => {
