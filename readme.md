@@ -44,7 +44,7 @@
         "id": "f5757bfe-3ca6-4f08-8767-123d6a370d68",
         "choice": "small"
     }
-    Jos peli voitetaan palautuu seuraavanlainen viesti
+    Jos peli voitetaan palautuu viesti, joka sisältää ilmoituksen voitosta ja pelistä tallennetut tiedot
     {
         "message": "Game won",
         "game": {
